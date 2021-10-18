@@ -219,7 +219,7 @@ func (c *Compactor) CompactTable(ctx context.Context, tableName string) error {
 func (c *Compactor) RunCompaction(ctx context.Context) error {
 	status := statusSuccess
 	start := time.Now()
-
+	level.Info(util_log.Logger).Log("msg", "jack test RunCompaction", c.cfg.RetentionEnabled)
 	if c.cfg.RetentionEnabled {
 		c.expirationChecker.MarkPhaseStarted()
 	}

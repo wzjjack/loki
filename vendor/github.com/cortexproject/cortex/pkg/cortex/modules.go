@@ -829,6 +829,7 @@ func (t *Cortex) initQueryScheduler() (services.Service, error) {
 }
 
 func (t *Cortex) setupModuleManager() error {
+	level.Info(util_log.Logger).Log("msg", "jack test setupModuleManager in cortex modules")
 	mm := modules.NewManager()
 
 	// Register all modules here.

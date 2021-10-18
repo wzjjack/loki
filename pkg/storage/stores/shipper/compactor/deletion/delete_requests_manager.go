@@ -125,6 +125,7 @@ func (d *DeleteRequestsManager) loadDeleteRequestsToProcess() error {
 }
 
 func (d *DeleteRequestsManager) Expired(ref retention.ChunkEntry, _ model.Time) (bool, []model.Interval) {
+	level.Info(util_log.Logger).Log("msg", "jack test delete requests manager Expired")
 	d.deleteRequestsToProcessMtx.Lock()
 	defer d.deleteRequestsToProcessMtx.Unlock()
 
@@ -188,6 +189,7 @@ func (d *DeleteRequestsManager) MarkPhaseFinished() {
 	defer d.deleteRequestsToProcessMtx.Unlock()
 
 	for _, deleteRequest := range d.deleteRequestsToProcess {
+		level.Info(util_log.Logger).Log("msg", "jack test going to update delete request to processed", deleteRequest)
 		if err := d.deleteRequestsStore.UpdateStatus(context.Background(), deleteRequest.UserID, deleteRequest.RequestID, StatusProcessed); err != nil {
 			level.Error(util_log.Logger).Log("msg", fmt.Sprintf("failed to mark delete request %s for user %s as processed", deleteRequest.RequestID, deleteRequest.UserID), "err", err)
 		}
