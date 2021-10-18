@@ -473,7 +473,7 @@ func (m *TableManager) createTables(ctx context.Context, descriptions []TableDes
 	merr := tsdb_errors.NewMulti()
 
 	for _, desc := range descriptions {
-		level.Info(util_log.Logger).Log("msg", "creating table", "table", desc.Name)
+		level.Info(util_log.Logger).Log("msg", "jack test creating table", "table", desc.Name)
 		err := m.client.CreateTable(ctx, desc)
 		if err != nil {
 			numFailures++
