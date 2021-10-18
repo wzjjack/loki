@@ -141,7 +141,7 @@ type Purger struct {
 // NewPurger creates a new Purger
 func NewPurger(cfg Config, deleteStore *DeleteStore, chunkStore chunk.Store, storageClient chunk.ObjectClient, registerer prometheus.Registerer) (*Purger, error) {
 	util_log.WarnExperimentalUse("Delete series API")
-
+	level.Info(util_log.Logger).Log("msg", "jack test NewPurger")
 	purger := Purger{
 		cfg:                      cfg,
 		deleteStore:              deleteStore,
@@ -162,6 +162,7 @@ func NewPurger(cfg Config, deleteStore *DeleteStore, chunkStore chunk.Store, sto
 
 // init starts workers, scheduler and then loads in process delete requests
 func (p *Purger) init(ctx context.Context) error {
+	level.Info(util_log.Logger).Log("msg", "jack test init purger", p.cfg.NumWorkers)
 	for i := 0; i < p.cfg.NumWorkers; i++ {
 		p.wg.Add(1)
 		go p.worker()

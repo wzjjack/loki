@@ -782,6 +782,8 @@ func (t *Cortex) initMemberlistKV() (services.Service, error) {
 }
 
 func (t *Cortex) initChunksPurger() (services.Service, error) {
+	level.Info(util_log.Logger).Log("msg", "jack test initChunksPurger config", t.Cfg)
+	level.Info(util_log.Logger).Log("msg", "jack test initChunksPurger", t.Cfg.Storage.Engine, storage.StorageEngineChunks, t.Cfg.PurgerConfig.Enable)
 	if t.Cfg.Storage.Engine != storage.StorageEngineChunks || !t.Cfg.PurgerConfig.Enable {
 		return nil, nil
 	}
