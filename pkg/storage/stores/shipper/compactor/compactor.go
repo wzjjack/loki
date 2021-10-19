@@ -241,6 +241,7 @@ func (c *Compactor) RunCompaction(ctx context.Context) error {
 	}()
 
 	_, dirs, err := c.objectClient.List(ctx, "", delimiter)
+	level.Info(util_log.Logger).Log("msg", "jack test List dirs", dirs, err)
 	if err != nil {
 		status = statusFailure
 		return err
@@ -253,7 +254,8 @@ func (c *Compactor) RunCompaction(ctx context.Context) error {
 
 	compactTablesChan := make(chan string)
 	errChan := make(chan error)
-
+	level.Info(util_log.Logger).Log("msg", "jack test tables", tables)
+	level.Info(util_log.Logger).Log("msg", "jack test MaxCompactionParallelism", c.cfg.MaxCompactionParallelism)
 	for i := 0; i < c.cfg.MaxCompactionParallelism; i++ {
 		go func() {
 			var err error

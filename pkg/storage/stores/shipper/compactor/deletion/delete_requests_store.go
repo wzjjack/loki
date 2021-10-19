@@ -111,7 +111,7 @@ func (ds *deleteRequestsStore) addDeleteRequest(ctx context.Context, userID stri
 	if err != nil {
 		return nil, err
 	}
-	level.Info(util_log.Logger).Log("msg", "jack test addDeleteRequest", userIDAndRequestID)
+	level.Info(util_log.Logger).Log("msg", "jack test addDeleteRequest %s", userIDAndRequestID)
 	return requestID, nil
 }
 
