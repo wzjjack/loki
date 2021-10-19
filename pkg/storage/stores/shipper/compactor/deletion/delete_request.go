@@ -1,6 +1,8 @@
 package deletion
 
 import (
+	util_log "github.com/cortexproject/cortex/pkg/util/log"
+	"github.com/go-kit/kit/log/level"
 	"github.com/prometheus/common/model"
 	"github.com/prometheus/prometheus/pkg/labels"
 	"github.com/prometheus/prometheus/promql/parser"
@@ -22,6 +24,7 @@ type DeleteRequest struct {
 }
 
 func (d *DeleteRequest) IsDeleted(entry retention.ChunkEntry) (bool, []model.Interval) {
+	level.Info(util_log.Logger).Log("msg", "jack test check if IsDeleted", entry, d)
 	if d.UserID != unsafeGetString(entry.UserID) {
 		return false, nil
 	}

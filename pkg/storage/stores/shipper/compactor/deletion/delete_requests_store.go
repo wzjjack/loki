@@ -12,9 +12,11 @@ import (
 	"time"
 	"unsafe"
 
+	"github.com/go-kit/kit/log/level"
 	"github.com/prometheus/common/model"
 
 	"github.com/cortexproject/cortex/pkg/chunk"
+	util_log "github.com/cortexproject/cortex/pkg/util/log"
 )
 
 type (
@@ -109,7 +111,7 @@ func (ds *deleteRequestsStore) addDeleteRequest(ctx context.Context, userID stri
 	if err != nil {
 		return nil, err
 	}
-
+	level.Info(util_log.Logger).Log("msg", "jack test addDeleteRequest", userIDAndRequestID)
 	return requestID, nil
 }
 
