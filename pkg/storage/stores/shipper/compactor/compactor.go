@@ -196,6 +196,7 @@ func (c *Compactor) loop(ctx context.Context) error {
 }
 
 func (c *Compactor) CompactTable(ctx context.Context, tableName string) error {
+	level.Info(util_log.Logger).Log("msg", "jack test CompactTable")
 	table, err := newTable(ctx, filepath.Join(c.cfg.WorkingDirectory, tableName), c.objectClient, c.cfg.RetentionEnabled, c.tableMarker)
 	if err != nil {
 		level.Error(util_log.Logger).Log("msg", "failed to initialize table for compaction", "table", tableName, "err", err)
@@ -254,7 +255,7 @@ func (c *Compactor) RunCompaction(ctx context.Context) error {
 
 	compactTablesChan := make(chan string)
 	errChan := make(chan error)
-	level.Info(util_log.Logger).Log("msg", "jack test tables", tables)
+	level.Info(util_log.Logger).Log("msg", "jack test tables", len(tables))
 	level.Info(util_log.Logger).Log("msg", "jack test MaxCompactionParallelism", c.cfg.MaxCompactionParallelism)
 	for i := 0; i < c.cfg.MaxCompactionParallelism; i++ {
 		go func() {
