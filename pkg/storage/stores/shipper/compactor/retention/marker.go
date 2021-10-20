@@ -46,6 +46,7 @@ type markerStorageWriter struct {
 }
 
 func NewMarkerStorageWriter(workingDir string) (MarkerStorageWriter, error) {
+	level.Info(util_log.Logger).Log("msg", "jack test NewMarkerStorageWriter")
 	dir := filepath.Join(workingDir, markersFolder)
 	err := chunk_util.EnsureDirectory(dir)
 	if err != nil {
@@ -62,6 +63,7 @@ func NewMarkerStorageWriter(workingDir string) (MarkerStorageWriter, error) {
 }
 
 func (m *markerStorageWriter) createFile() error {
+	level.Info(util_log.Logger).Log("msg", "jack test going to create mark file")
 	fileName := filepath.Join(m.workDir, fmt.Sprint(time.Now().UnixNano()))
 	db, err := shipper_util.SafeOpenBoltdbFile(fileName)
 	if err != nil {

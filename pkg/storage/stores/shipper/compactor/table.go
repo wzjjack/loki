@@ -84,11 +84,10 @@ func (t *table) compact(tableHasExpiredStreams bool) error {
 			level.Error(t.logger).Log("msg", "failed to cleanup table")
 		}
 	}()
-
 	applyRetention := t.applyRetention && tableHasExpiredStreams
-
+	level.Info(t.logger).Log("msg", "jack test laalal applyRetention", applyRetention)
 	if !applyRetention {
-		if len(objects) < compactMinDBs {
+		if len(objects) < 1 {
 			level.Info(t.logger).Log("msg", fmt.Sprintf("skipping compaction since we have just %d files in storage", len(objects)))
 			return nil
 		}

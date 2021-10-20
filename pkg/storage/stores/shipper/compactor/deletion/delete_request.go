@@ -1,6 +1,8 @@
 package deletion
 
 import (
+	"fmt"
+
 	util_log "github.com/cortexproject/cortex/pkg/util/log"
 	"github.com/go-kit/kit/log/level"
 	"github.com/prometheus/common/model"
@@ -24,11 +26,15 @@ type DeleteRequest struct {
 }
 
 func (d *DeleteRequest) IsDeleted(entry retention.ChunkEntry) (bool, []model.Interval) {
-	level.Info(util_log.Logger).Log("msg", "jack test check if IsDeleted", entry, d)
+	level.Info(util_log.Logger).Log("msg", "jack test check if IsDeleted", entry, &d)
+	fmt.Printf("jack test lalalal %+v", entry)
 	if d.UserID != unsafeGetString(entry.UserID) {
 		return false, nil
 	}
-
+	level.Info(util_log.Logger).Log("msg", "jack test check if entry.From", entry.From)
+	level.Info(util_log.Logger).Log("msg", "jack test check if entry.Through", entry.Through)
+	level.Info(util_log.Logger).Log("msg", "jack test check if d.StartTime", d.StartTime)
+	level.Info(util_log.Logger).Log("msg", "jack test check if d.EndTime", d.EndTime)
 	if !intervalsOverlap(model.Interval{
 		Start: entry.From,
 		End:   entry.Through,

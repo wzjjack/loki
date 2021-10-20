@@ -58,6 +58,7 @@ func NewMarker(workingDirectory string, config storage.SchemaConfig, expiration 
 
 // MarkForDelete marks all chunks expired for a given table.
 func (t *Marker) MarkForDelete(ctx context.Context, tableName string, db *bbolt.DB) (bool, int64, error) {
+	level.Info(util_log.Logger).Log("msg", "jack test MarkForDelete")
 	start := time.Now()
 	status := statusSuccess
 	defer func() {
@@ -67,6 +68,8 @@ func (t *Marker) MarkForDelete(ctx context.Context, tableName string, db *bbolt.
 	level.Debug(util_log.Logger).Log("msg", "starting to process table", "table", tableName)
 
 	empty, markCount, err := t.markTable(ctx, tableName, db)
+	level.Info(util_log.Logger).Log("msg", "jack test MarkForDelete result", empty, markCount)
+	fmt.Printf("jack test lalalalyyyy %+v", markCount)
 	if err != nil {
 		status = statusFailure
 		return false, 0, err
@@ -75,6 +78,7 @@ func (t *Marker) MarkForDelete(ctx context.Context, tableName string, db *bbolt.
 }
 
 func (t *Marker) markTable(ctx context.Context, tableName string, db *bbolt.DB) (bool, int64, error) {
+	level.Info(util_log.Logger).Log("msg", "jack test markTable")
 	schemaCfg, ok := schemaPeriodForTable(t.config, tableName)
 	if !ok {
 		return false, 0, fmt.Errorf("could not find schema for table: %s", tableName)

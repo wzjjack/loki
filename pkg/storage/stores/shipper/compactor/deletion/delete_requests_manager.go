@@ -146,6 +146,7 @@ func (d *DeleteRequestsManager) Expired(ref retention.ChunkEntry, _ model.Time) 
 			entry.From = interval.Start
 			entry.Through = interval.End
 			isDeleted, newIntervalsToRetain := deleteRequest.IsDeleted(entry)
+			level.Info(util_log.Logger).Log("msg", "jack test IsDeleted result", isDeleted, newIntervalsToRetain)
 			if !isDeleted {
 				rebuiltIntervals = append(rebuiltIntervals, interval)
 			} else {
