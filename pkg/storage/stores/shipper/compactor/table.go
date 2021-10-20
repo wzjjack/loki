@@ -85,6 +85,8 @@ func (t *table) compact(tableHasExpiredStreams bool) error {
 		}
 	}()
 	applyRetention := t.applyRetention && tableHasExpiredStreams
+	level.Info(t.logger).Log("msg", "jack test laalal t.applyRetention", t.applyRetention)
+	level.Info(t.logger).Log("msg", "jack test laalal tableHasExpiredStreams", tableHasExpiredStreams)
 	level.Info(t.logger).Log("msg", "jack test laalal applyRetention", applyRetention)
 	if !applyRetention {
 		if len(objects) < 1 {
