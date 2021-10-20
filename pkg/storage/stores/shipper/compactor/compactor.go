@@ -286,6 +286,7 @@ func (c *Compactor) RunCompaction(ctx context.Context) error {
 
 	go func() {
 		for _, tableName := range tables {
+			level.Info(util_log.Logger).Log("msg", "jack test going to compact tables", "table-name", tableName)
 			if tableName == deletion.DeleteRequestsTableName {
 				// we do not want to compact or apply retention on delete requests table
 				continue
