@@ -2,13 +2,11 @@ package util
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"strings"
 
 	"github.com/cortexproject/cortex/pkg/chunk"
-	"github.com/go-kit/log/level"
-
-	util_log "github.com/cortexproject/cortex/pkg/util/log"
 )
 
 type PrefixedObjectClient struct {
@@ -37,7 +35,7 @@ func (p PrefixedObjectClient) List(ctx context.Context, prefix, delimeter string
 	for i := range commonPrefixes {
 		commonPrefixes[i] = chunk.StorageCommonPrefix(strings.TrimPrefix(string(commonPrefixes[i]), p.prefix))
 	}
-	level.Info(util_log.Logger).Log("msg", "jack test object client", objects, commonPrefixes)
+	fmt.Printf("jack test babadsfasdfas %+v \n %+v", objects, commonPrefixes)
 	return objects, commonPrefixes, nil
 }
 
