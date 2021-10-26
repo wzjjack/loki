@@ -103,8 +103,9 @@ func (f *FSObjectClient) List(ctx context.Context, prefix, delimiter string) ([]
 	}
 
 	folderPath := filepath.Join(f.cfg.Directory, filepath.FromSlash(prefix))
-
+	level.Info(util_log.Logger).Log("msg", "jack test folderPath", folderPath)
 	info, err := os.Stat(folderPath)
+	level.Info(util_log.Logger).Log("msg", "jack test info", info, err)
 	if err != nil {
 		if os.IsNotExist(err) {
 			return nil, nil, nil
@@ -156,7 +157,7 @@ func (f *FSObjectClient) List(ctx context.Context, prefix, delimiter string) ([]
 		storageObjects = append(storageObjects, chunk.StorageObject{Key: relPath, ModifiedAt: info.ModTime()})
 		return nil
 	})
-
+	level.Info(util_log.Logger).Log("msg", "jack test storageObjects", storageObjects, commonPrefixes, err)
 	return storageObjects, commonPrefixes, err
 }
 

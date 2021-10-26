@@ -354,6 +354,7 @@ func NewBucketClient(storageConfig Config) (chunk.BucketClient, error) {
 
 // NewObjectClient makes a new StorageClient of the desired types.
 func NewObjectClient(name string, cfg Config) (chunk.ObjectClient, error) {
+	level.Info(util_log.Logger).Log("msg", "jack test NewObjectClient", name)
 	switch name {
 	case StorageTypeAWS, StorageTypeS3:
 		return aws.NewS3ObjectClient(cfg.AWSStorageConfig.S3Config)

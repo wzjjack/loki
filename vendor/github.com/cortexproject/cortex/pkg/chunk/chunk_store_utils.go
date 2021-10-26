@@ -154,6 +154,9 @@ func (c *Fetcher) FetchChunks(ctx context.Context, chunks []Chunk, keys []string
 	var fromStorage []Chunk
 	if len(missing) > 0 {
 		fromStorage, err = c.storage.GetChunks(ctx, missing)
+		if err == ErrStorageObjectNotFound {
+			return fromCache, nil
+		}
 	}
 
 	// Always cache any chunks we did get
