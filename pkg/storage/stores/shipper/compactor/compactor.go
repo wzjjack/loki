@@ -325,10 +325,12 @@ func newExpirationChecker(retentionExpiryChecker, deletionExpiryChecker retentio
 }
 
 func (e *expirationChecker) Expired(ref retention.ChunkEntry, now model.Time) (bool, []model.Interval) {
+	level.Info(util_log.Logger).Log("msg", "jack test compactor expired")
 	if expired, nonDeletedIntervals := e.retentionExpiryChecker.Expired(ref, now); expired {
+		level.Info(util_log.Logger).Log("msg", "jack test compactor retentionExpiryChecker")
 		return expired, nonDeletedIntervals
 	}
-
+	level.Info(util_log.Logger).Log("msg", "jack test compactor deletionExpiryChecker")
 	return e.deletionExpiryChecker.Expired(ref, now)
 }
 
