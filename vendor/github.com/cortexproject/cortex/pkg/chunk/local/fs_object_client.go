@@ -113,6 +113,7 @@ func (f *FSObjectClient) List(ctx context.Context, prefix, delimiter string) ([]
 		return nil, nil, err
 	}
 	if !info.IsDir() {
+		level.Info(util_log.Logger).Log("msg", "jack test !info.IsDir", info, info.IsDir())
 		// When listing single file, return this file only.
 		return []chunk.StorageObject{{Key: info.Name(), ModifiedAt: info.ModTime()}}, nil, nil
 	}
@@ -121,6 +122,7 @@ func (f *FSObjectClient) List(ctx context.Context, prefix, delimiter string) ([]
 	var commonPrefixes []chunk.StorageCommonPrefix
 
 	err = filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
+		level.Info(util_log.Logger).Log("msg", "jack test Walk Walk", err)
 		if err != nil {
 			return err
 		}
