@@ -103,9 +103,9 @@ func (f *FSObjectClient) List(ctx context.Context, prefix, delimiter string) ([]
 	}
 
 	folderPath := filepath.Join(f.cfg.Directory, filepath.FromSlash(prefix))
-	level.Info(util_log.Logger).Log("msg", "jack test folderPath", folderPath)
+	level.Info(util_log.Logger).Log("msg", "jack test folderPath1234", folderPath)
 	info, err := os.Stat(folderPath)
-	level.Info(util_log.Logger).Log("msg", "jack test info", info, err)
+	level.Info(util_log.Logger).Log("msg", "jack test info222", info, err)
 	if err != nil {
 		if os.IsNotExist(err) {
 			return nil, nil, nil
@@ -120,7 +120,7 @@ func (f *FSObjectClient) List(ctx context.Context, prefix, delimiter string) ([]
 
 	var storageObjects []chunk.StorageObject
 	var commonPrefixes []chunk.StorageCommonPrefix
-
+	level.Info(util_log.Logger).Log("msg", "jack test going to Walk")
 	err = filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
 		level.Info(util_log.Logger).Log("msg", "jack test Walk Walk", err)
 		if err != nil {
