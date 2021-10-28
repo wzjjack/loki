@@ -63,7 +63,7 @@ type Table struct {
 
 func NewTable(spanCtx context.Context, name, cacheLocation string, storageClient StorageClient, boltDBIndexClient BoltDBIndexClient, metrics *metrics) *Table {
 	ctx, cancel := context.WithCancel(context.Background())
-
+	level.Info(util_log.Logger).Log("msg", "jack test NewTable name cacheLocation", name, cacheLocation)
 	table := Table{
 		name:              name,
 		cacheLocation:     cacheLocation,
@@ -175,6 +175,7 @@ func LoadTable(ctx context.Context, name, cacheLocation string, storageClient St
 // init downloads all the db files for the table from object storage.
 // it assumes the locking of mutex is taken care of by the caller.
 func (t *Table) init(ctx context.Context, spanLogger log.Logger) (err error) {
+	level.Info(util_log.Logger).Log("msg", "jack test table init init")
 	defer func() {
 		status := statusSuccess
 		if err != nil {
@@ -203,7 +204,7 @@ func (t *Table) init(ctx context.Context, spanLogger log.Logger) (err error) {
 		return
 	}
 
-	level.Debug(util_log.Logger).Log("msg", fmt.Sprintf("list of files to download for period %s: %s", t.name, objects))
+	level.Info(util_log.Logger).Log("msg", fmt.Sprintf("list of files to download for period %s: %s", t.name, objects))
 
 	folderPath, err := t.folderPathForTable(true)
 	if err != nil {
